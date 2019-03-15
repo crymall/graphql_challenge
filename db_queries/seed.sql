@@ -32,7 +32,7 @@ CREATE TABLE locations (
 CREATE TABLE events (
   id SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,
-  event_date DATE,
+  event_date DATE NOT NULL,
   event_time TIME,
   description TEXT,
   org_id INTEGER REFERENCES organizations(id),

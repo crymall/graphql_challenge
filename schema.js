@@ -42,11 +42,13 @@ const schemaString = `
   type Query {
     getOrganization(id: ID!): Organization
     getLocation(id: ID!): Location
+    getEvent(id: ID!): Event
   }
 
   type Mutation {
     addOrganization(input: OrganizationInput): Organization
     addLocation(input: LocationInput): Location
+    addEvent(input: EventInput): Event
   }
 `;
 
