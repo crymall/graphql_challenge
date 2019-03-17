@@ -33,19 +33,29 @@ const schemaString = `
   }
 
   input LocationInput {
-    name: String!
+    name: String
     address: String
     latitude: Float
     longitude: Float
-    orgId: Int!
+    orgId: Int
+  }
+
+  input LocationUpdateInput {
+    id: ID!
+    body: LocationInput!
   }
 
   input EventInput {
-    name: String!
-    eventDate: String!
+    name: String
+    eventDate: String
     eventTime: String
     description: String
-    orgId: Int!
+    orgId: Int
+  }
+
+  input EventUpdateInput {
+    id: ID!
+    body: EventInput!
   }
 
   type Query {
@@ -55,9 +65,13 @@ const schemaString = `
   }
 
   type Mutation {
-    addOrganization(input: OrganizationInput): Organization
-    addLocation(input: LocationInput): Location
-    addEvent(input: EventInput): Event
+    addOrganization(input: OrganizationInput!): Organization
+    addLocation(input: LocationInput!): Location
+    updateLocation(input: LocationUpdateInput!): Location
+    deleteLocation(id: ID!): Location
+    addEvent(input: EventInput!): Event
+    updateEvent(input: EventUpdateInput!): Event
+    deleteEvent(id: ID!): Event
   }
 `;
 

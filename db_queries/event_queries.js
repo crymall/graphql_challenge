@@ -1,17 +1,6 @@
 const db = require("./index");
 const util = require("./db_util");
 
-const addEvent = async myEvent => {
-  try {
-    util.toSnakeCase(myEvent);
-    const queryString = util.craftInsertString(myEvent, "events");
-    await db.none(queryString);
-    return myEvent;
-  } catch (err) {
-    return err;
-  }
-};
-
 const getEvent = async id => {
   try {
     const theEvent = await db.one(
@@ -26,4 +15,26 @@ const getEvent = async id => {
   }
 };
 
-module.exports = { addEvent, getEvent };
+const addEvent = async myEvent => {
+  try {
+    util.toSnakeCase(myEvent);
+    const queryString = util.craftInsertString(myEvent, "events");
+    await db.none(queryString);
+    return myEvent;
+  } catch (err) {
+    return err;
+  }
+};
+
+const updateEvent = async input => {
+  try {
+    util.toSnakeCase(input.body);
+    const updateString = util.craftUpdateString(input.id, input.body, "events");
+    await db.none(updateString);
+    return input.body;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = { getEvent, addEvent, updateEvent };

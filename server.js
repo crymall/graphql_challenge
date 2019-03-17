@@ -11,12 +11,14 @@ const app = express();
 const schema = buildSchema(schemaString);
 
 const root = {
-  addOrganization: ({ input }) => orgQueries.addOrganization(input.name),
   getOrganization: ({ id }) => orgQueries.getOrganization(id),
-  addLocation: ({ input }) => locQueries.addLocation(input),
+  addOrganization: ({ input }) => orgQueries.addOrganization(input.name),
   getLocation: ({ id }) => locQueries.getLocation(id),
+  addLocation: ({ input }) => locQueries.addLocation(input),
+  updateLocation: ({ input }) => locQueries.updateLocation(input),
+  getEvent: ({ id }) => evQueries.getEvent(id),
   addEvent: ({ input }) => evQueries.addEvent(input),
-  getEvent: ({ id }) => evQueries.getEvent(id)
+  updateEvent: ({ input }) => evQueries.updateEvent(input)
 };
 
 app.use(

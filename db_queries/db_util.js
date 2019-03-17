@@ -9,8 +9,10 @@ const toSnakeCase = obj => {
     }
   }
 
-  obj.org_id = obj.orgId;
-  delete obj.orgId;
+  if (obj.orgId) {
+    obj.org_id = obj.orgId;
+    delete obj.orgId;
+  }
 
   return obj;
 };
@@ -42,4 +44,27 @@ const craftInsertString = (obj, type) => {
   return queryString;
 };
 
-module.exports = { toSnakeCase, craftInsertString };
+const craftUpdateString = (id, obj, type) => {
+  console.log(id, obj, type);
+  const keys = Object.keys(obj);
+
+  let queryString = `UPDATE ${type} SET `;
+
+  keys.forEach((key, i) => {
+    if (i < keys.length - 1) {
+      typeof obj[key] === "string"
+        ? (queryString += `${key} = '${obj[key]}', `)
+        : (queryString += `${key} = ${obj[key]}, `);
+    } else {
+      typeof obj[key] === "string"
+        ? (queryString += `${key} = '${obj[key]}' `)
+        : (queryString += `${key} = ${obj[key]} `);
+    }
+  });
+
+  queryString += `WHERE id = ${id}`;
+
+  return queryString;
+};
+
+module.exports = { toSnakeCase, craftInsertString, craftUpdateString };
