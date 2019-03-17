@@ -40,4 +40,13 @@ const updateLocation = async input => {
   }
 };
 
-module.exports = { getLocation, addLocation, updateLocation };
+const deleteLocation = async id => {
+  try {
+    await db.none("DELETE FROM locations WHERE id = $1", [id]);
+    return { body: `Location ${id} deleted.` };
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = { getLocation, addLocation, updateLocation, deleteLocation };

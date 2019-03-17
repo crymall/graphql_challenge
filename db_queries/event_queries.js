@@ -37,4 +37,13 @@ const updateEvent = async input => {
   }
 };
 
-module.exports = { getEvent, addEvent, updateEvent };
+const deleteEvent = async id => {
+  try {
+    await db.none("DELETE FROM events WHERE id = $1", [id]);
+    return { body: `Event ${id} deleted.` };
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = { getEvent, addEvent, updateEvent, deleteEvent };

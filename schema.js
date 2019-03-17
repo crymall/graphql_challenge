@@ -17,6 +17,10 @@ const schemaString = `
     updatedAt: String
   }
 
+  type DeleteMessage {
+    body: String!
+  }
+
   type Event {
     id: Int
     name: String
@@ -68,10 +72,10 @@ const schemaString = `
     addOrganization(input: OrganizationInput!): Organization
     addLocation(input: LocationInput!): Location
     updateLocation(input: LocationUpdateInput!): Location
-    deleteLocation(id: ID!): Location
+    deleteLocation(id: ID!): DeleteMessage
     addEvent(input: EventInput!): Event
     updateEvent(input: EventUpdateInput!): Event
-    deleteEvent(id: ID!): Event
+    deleteEvent(id: ID!): DeleteMessage
   }
 `;
 

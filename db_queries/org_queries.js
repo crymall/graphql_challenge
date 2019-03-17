@@ -1,9 +1,9 @@
 const db = require("./index");
 
-const addOrganization = async name => {
+const addOrganization = async input => {
   try {
-    await db.none("INSERT INTO organizations(name) VALUES ($1)", [name]);
-    return { name: name };
+    await db.none("INSERT INTO organizations(name) VALUES ($1)", [input.name]);
+    return { name: input.name };
   } catch (err) {
     return err;
   }

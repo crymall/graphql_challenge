@@ -12,13 +12,15 @@ const schema = buildSchema(schemaString);
 
 const root = {
   getOrganization: ({ id }) => orgQueries.getOrganization(id),
-  addOrganization: ({ input }) => orgQueries.addOrganization(input.name),
+  addOrganization: ({ input }) => orgQueries.addOrganization(input),
   getLocation: ({ id }) => locQueries.getLocation(id),
   addLocation: ({ input }) => locQueries.addLocation(input),
   updateLocation: ({ input }) => locQueries.updateLocation(input),
+  deleteLocation: ({ id }) => locQueries.deleteLocation(id),
   getEvent: ({ id }) => evQueries.getEvent(id),
   addEvent: ({ input }) => evQueries.addEvent(input),
-  updateEvent: ({ input }) => evQueries.updateEvent(input)
+  updateEvent: ({ input }) => evQueries.updateEvent(input),
+  deleteEvent: ({ id }) => evQueries.deleteEvent(id)
 };
 
 app.use(
