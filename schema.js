@@ -1,22 +1,31 @@
 const schemaString = `
   type Organization {
+    id: Int
     name: String
+    createdAt: String
+    updatedAt: String
   }
 
   type Location {
+    id: Int
     name: String
     address: String
     latitude: Float
     longitude: Float
     orgId: Int
+    createdAt: String
+    updatedAt: String
   }
 
   type Event {
+    id: Int
     name: String
     eventDate: String
     eventTime: String
     description: String
     orgId: Int
+    createdAt: String
+    updatedAt: String
   }
 
   input OrganizationInput {
