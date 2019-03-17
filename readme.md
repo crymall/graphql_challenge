@@ -2,7 +2,7 @@
 
 This API allows you to manage organizations with events and locations. It includes detailed API endpoints to handle any CRUD-type operation you'd like to perform on events and locations (full list found at `./graphql_utils/root`).
 
-In order to start run this project locally, perform the following operations:
+In order to run this project locally, perform the following operations:
 
 - Clone the repo.
 - In the root directory, `npm install`.
