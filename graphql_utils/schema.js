@@ -64,8 +64,12 @@ const schemaString = `
 
   type Query {
     getOrganization(id: ID!): Organization
+    getOrganizationForLoc(input: LocationInput!): Organization
+    getOrganizationForEvent(input: EventInput!): Organization
     getLocation(id: ID!): Location
+    getLocationsForOrg(id: ID!): [Location]
     getEvent(id: ID!): Event
+    getEventsForOrg(id: ID!): [Event]
   }
 
   type Mutation {
@@ -79,4 +83,4 @@ const schemaString = `
   }
 `;
 
-module.exports = { schemaString: schemaString };
+module.exports = { schemaString };

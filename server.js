@@ -1,27 +1,14 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const { buildSchema } = require("graphql");
-const { schemaString } = require("./schema");
-const orgQueries = require("./db_queries/org_queries");
-const locQueries = require("./db_queries/location_queries");
-const evQueries = require("./db_queries/event_queries");
+const { schemaString } = require("./graphql_utils/schema");
+const rootUtils = require("./graphql_utils/root");
 
 const app = express();
 
 const schema = buildSchema(schemaString);
 
-const root = {
-  getOrganization: ({ id }) => orgQueries.getOrganization(id),
-  addOrganization: ({ input }) => orgQueries.addOrganization(input),
-  getLocation: ({ id }) => locQueries.getLocation(id),
-  addLocation: ({ input }) => locQueries.addLocation(input),
-  updateLocation: ({ input }) => locQueries.updateLocation(input),
-  deleteLocation: ({ id }) => locQueries.deleteLocation(id),
-  getEvent: ({ id }) => evQueries.getEvent(id),
-  addEvent: ({ input }) => evQueries.addEvent(input),
-  updateEvent: ({ input }) => evQueries.updateEvent(input),
-  deleteEvent: ({ id }) => evQueries.deleteEvent(id)
-};
+const root = { ...rootUtils };
 
 app.use(
   "/graphql",

@@ -22,4 +22,17 @@ const getOrganization = async id => {
   }
 };
 
-module.exports = { addOrganization, getOrganization };
+const getOrganizationForFKey = async input => {
+  try {
+    const theOrg = await db.one(
+      `SELECT id, name, created_at AS "createdAt",
+      updated_at AS "updatedAt" FROM organizations WHERE id = $1`,
+      [input.orgId]
+    );
+    return theOrg;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = { addOrganization, getOrganization, getOrganizationForFKey };

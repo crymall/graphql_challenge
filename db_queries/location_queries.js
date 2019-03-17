@@ -49,4 +49,24 @@ const deleteLocation = async id => {
   }
 };
 
-module.exports = { getLocation, addLocation, updateLocation, deleteLocation };
+const getLocationsForOrg = async id => {
+  try {
+    let theLocations = await db.any(
+      `SELECT name, address, latitude, longitude, org_id AS "orgId"
+      FROM locations WHERE org_id = $1`,
+      [id]
+    );
+
+    return theLocations;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = {
+  getLocation,
+  addLocation,
+  updateLocation,
+  deleteLocation,
+  getLocationsForOrg
+};

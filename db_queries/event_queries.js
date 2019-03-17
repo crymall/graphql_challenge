@@ -46,4 +46,25 @@ const deleteEvent = async id => {
   }
 };
 
-module.exports = { getEvent, addEvent, updateEvent, deleteEvent };
+const getEventsForOrg = async id => {
+  try {
+    let theEvents = await db.any(
+      `SELECT id, name, event_date AS "eventDate", event_time AS "eventTime",
+      description, org_id AS "orgId", created_at AS "createdAt", updated_at AS "updatedAt"
+      FROM events WHERE org_id = $1`,
+      [id]
+    );
+
+    return theEvents;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = {
+  getEvent,
+  addEvent,
+  updateEvent,
+  deleteEvent,
+  getEventsForOrg
+};
