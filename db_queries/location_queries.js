@@ -1,5 +1,7 @@
+const axios = require("axios");
 const db = require("./index");
 const util = require("./db_util");
+const { key } = require("../secrets.json");
 
 const getLocation = async id => {
   try {
@@ -17,6 +19,21 @@ const getLocation = async id => {
 const addLocation = async location => {
   try {
     util.toSnakeCase(location);
+    if (!location.latitude || !location.longitude) {
+      try {
+        let geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=`;
+        geoUrl += location.address.split("+").join("");
+        geoUrl += `&key=${key}`;
+
+        const geocoded = await axios.get(geoUrl);
+        const geometry = geocoded.data.results[0].geometry.location;
+        location.latitude = geometry.lat;
+        location.longitude = geometry.lng;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     const queryString = util.craftInsertString(location, "locations");
     await db.none(queryString);
     return location;
