@@ -7,5 +7,5 @@ In order to start run this project locally, perform the following operations:
 - Clone the repo.
 - In the root directory, `npm install`.
 - In the `./db_queries` directory, with PostgreSQL installed and running, run `psql -f seed.sql`.
-- `npm start`.
+- Return to the root directory and run `npm start`.
 - Navigate to `http://localhost:4000/graphql`
