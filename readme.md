@@ -7,5 +7,6 @@ In order to start run this project locally, perform the following operations:
 - Clone the repo.
 - In the root directory, `npm install`.
 - In the `./db_queries` directory, with PostgreSQL installed and running, run `psql -f seed.sql`.
-- Return to the root directory and run `npm start`.
+- If you'd like to automatically extract latitude and longitude from addresses inputted when a user adds a location, create a file called `secrets.json` in the root directory. Insert your Google Maps API key in the following format: `{"key": "MY_API_KEY"}`. Otherwise, navigate to the file `./db_queries/location_queries` and remove lines 4 and 23-36.
+- Run `npm start`.
 - Navigate to `http://localhost:4000/graphql`

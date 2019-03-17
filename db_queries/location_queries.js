@@ -19,6 +19,7 @@ const getLocation = async id => {
 const addLocation = async location => {
   try {
     util.toSnakeCase(location);
+
     if (!location.latitude || !location.longitude) {
       try {
         let geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=`;
